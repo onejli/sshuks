@@ -9,7 +9,7 @@ Requirements
     ```
     user@client:~$ ssh server
     Last login: Thu Jun 15 11:43:58 2017 from 127.0.0.1
-    user@server:~$ 
+    user@server:~$
     ```
 2. Puppet
 3. Facter `ownerid` fact that maps to the user whose `~/.ssh/authorized_keys` file will be used
@@ -71,7 +71,7 @@ Additional Details
     Nmap done: 1 IP address (1 host up) scanned in 6.38 seconds
     ```
     **TODO**: Check UDP ports
-* The Dropbear SSH server binds to port 22 and is started with the `-Fs` flags. 
+* The Dropbear SSH server binds to port 22 and is started with the `-Fs` flags.
 
     From the Dropbear man page:
     ```
