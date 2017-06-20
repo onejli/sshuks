@@ -30,6 +30,8 @@ Getting Started
     Optionally include `--noop` to see ["what changes Puppet will make without actually executing the changes."](https://docs.puppet.com/puppet/latest/man/apply.html#OPTIONS)
 3. Reboot the host **IF** the puppet run was **SUCCESSFUL**
 4. Connect to the Dropbear SSH server and unlock the LUKS encrypted partition
+
+    **NOTE:** You must ssh as the **root** user (i.e., `ssh root@<HOSTNAME_GOES_HERE>`) to input the unlock password
     ```
     user@client:~$ ssh root@<HOSTNAME_GOES_HERE>
     To unlock root-partition run unlock
@@ -70,7 +72,7 @@ Additional Details
 
     Nmap done: 1 IP address (1 host up) scanned in 6.38 seconds
     ```
-    **TODO**: Check UDP ports
+    **TODO:** Check UDP ports
 * The Dropbear SSH server binds to port 22 and is started with the `-Fs` flags.
 
     From the Dropbear man page:
