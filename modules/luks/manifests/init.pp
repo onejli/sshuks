@@ -42,10 +42,9 @@ class luks {
     refreshonly => true;
   }
 
-  file { '/etc/initramfs-tools/root/.ssh':
+  $dotssh_dirs = [ '/etc/initramfs-tools/root', '/etc/initramfs-tools/root/.ssh' ]
+  file { $dotssh_dirs:
     ensure  => directory,
-    recurse => true,
-    purge   => true,
     owner   => root,
     group   => root,
     mode    => '0700',
