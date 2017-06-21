@@ -31,7 +31,9 @@ Getting Started
 3. Reboot the host **IF** the puppet run was **SUCCESSFUL**
 4. Connect to the Dropbear SSH server and unlock the LUKS encrypted partition
 
-    **NOTE:** You must ssh as the **root** user (i.e., `ssh root@<HOSTNAME_GOES_HERE>`) to input the unlock password
+    1. ssh as the **root** user (i.e., `ssh root@<HOSTNAME_GOES_HERE>`)
+    2. Execute the `unlock` command
+    3. Input your unlock password
     ```
     user@client:~$ ssh root@<HOSTNAME_GOES_HERE>
     To unlock root-partition run unlock
