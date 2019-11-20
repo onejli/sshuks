@@ -31,11 +31,11 @@ Getting Started
 3. Reboot the host **IF** the puppet run was **SUCCESSFUL**
 4. Connect to the Dropbear SSH server and unlock the LUKS encrypted partition
 
-    1. ssh as the **root** user (i.e., `ssh root@<HOSTNAME_GOES_HERE>`)
+    1. ssh as the **root** user on port 8022 (i.e., `ssh -p 8022 root@<HOSTNAME_GOES_HERE>`)
     2. Execute the `unlock` command
     3. Input your unlock password
     ```
-    user@client:~$ ssh root@<HOSTNAME_GOES_HERE>
+    user@client:~$ ssh -p 8022 root@<HOSTNAME_GOES_HERE>
     To unlock root-partition run unlock
 
 
@@ -59,23 +59,7 @@ Getting Started
 
 Additional Details
 ---------------
-* Only TCP port 22 is open while Dropbear is running.
-    ```
-    $ sudo nmap -sS -p- <HOSTNAME_GOES_HERE>
-
-    Starting Nmap 6.40 ( http://nmap.org ) at 2017-06-15 11:59 PDT
-    Nmap scan report for <HOSTNAME_GOES_HERE> <IP_ADDR_GOES_HERE>
-    Host is up (0.00019s latency).
-    rDNS record for <IP_ADDR_GOES_HERE>: <HOSTNAME_GOES_HERE>
-    Not shown: 65534 closed ports
-    PORT   STATE SERVICE
-    22/tcp open  ssh
-    MAC Address: <MAC_ADDR_GOES_HERE>
-
-    Nmap done: 1 IP address (1 host up) scanned in 6.38 seconds
-    ```
-    **TODO:** Check UDP ports
-* The Dropbear SSH server binds to port 22 and is started with the `-Fs` flags.
+* By default, the `-Fs` flags are passed to Dropbear.  This module also includes `-p 8022 -j -k -I 60`.
 
     From the Dropbear man page:
     ```
@@ -84,6 +68,10 @@ Additional Details
     -p [address:]port
            Listen on specified address and TCP port. If just a port is given listen on all
            addresses. up to 10 can be specified (default 22 if none specified).
+    -j     Disable local port forwarding.
+    -k     Disable remote port forwarding.
+    -I idle_timeout
+           Disconnect the session if no traffic is transmitted or received for idle_timeout seconds.
     ```
 * The `/usr/share/initramfs-tools/scripts/init-premount/dropbear` script is used to start the Dropbear SSH server.
     ```bash
@@ -135,3 +123,4 @@ Additional Details
 References
 ---------------
 * https://stinkyparkia.wordpress.com/2014/10/14/remote-unlocking-luks-encrypted-lvm-using-dropbear-ssh-in-ubuntu-server-14-04-1-with-static-ipst
+* https://hamy.io/post/0009/how-to-install-luks-encrypted-ubuntu-18.04.x-server-and-enable-remote-unlocking/
